@@ -38,8 +38,6 @@ bool processLine(AccountGroup& accounts, BookGroup& books,
 
     if (!std::cin) return true;
 
-    if (line.totalLength() > 1024) throw InvalidCommand("Invalid");
-
     if (!line.hasMoreToken()) return false;
 
     string_t command = line.nextToken();
