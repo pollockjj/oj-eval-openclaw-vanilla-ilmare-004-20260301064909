@@ -467,6 +467,10 @@ void BookGroup::buy(TokenScanner& line, const LoggingSituation& loggingStatus, L
         }
     }
     int quantity = stringToInt(quantityString);
+    if (quantity == 0) {
+        delete offset;
+        throw InvalidCommand("Invalid");
+    }
 
     // read the book data
     Book book;
@@ -501,12 +505,14 @@ void BookGroup::importBook(TokenScanner& line, const LoggingSituation& loggingSt
     if (!line.hasMoreToken()) throw InvalidCommand("Invalid");
     string_t quantityString = line.nextToken();
     int quantity = stringToInt(quantityString);
+    if (quantity == 0) throw InvalidCommand("Invalid");
 
     // read the total cost
     if (!line.hasMoreToken()) throw InvalidCommand("Invalid");
     string_t totalCostString = line.nextToken();
     if (line.hasMoreToken()) throw InvalidCommand("Invalid");
     double totalCost = stringToDouble(totalCostString);
+    if (totalCost <= 0) throw InvalidCommand("Invalid");
 
     // read the book data
     Book book;

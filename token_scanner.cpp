@@ -74,13 +74,17 @@ int stringToInt(const string_t& input)
 
 double stringToDouble(const string_t& input)
 {
+    if (input.empty() || input.length() > 13) throw InvalidCommand("Invalid");
+
     double output = 0;
     bool point = false;
+    bool has_digit = false;
     double number = 1;
     for (const char c : input) {
         if (c < 46 || c == 47 || c > 57) throw InvalidCommand("Invalid");
         if (point) {
             if (c == '.') throw InvalidCommand("Invalid");
+            has_digit = true;
             number *= 10;
             output += double(c - 48) / number;
         } else {
@@ -88,8 +92,11 @@ double stringToDouble(const string_t& input)
                 point = true;
                 continue;
             }
+            has_digit = true;
             output = output * 10 + c - 48;
         }
     }
+    if (!has_digit) throw InvalidCommand("Invalid");
+    if (input.front() == '.' || input.back() == '.') throw InvalidCommand("Invalid");
     return output;
 }
