@@ -448,20 +448,21 @@ private:
                     printInvalid();
                     return true;
                 }
+                const bool has_count = (t.size() == 3);
                 int cnt = static_cast<int>(finance_tx_.size());
-                if (t.size() == 3) {
+                if (has_count) {
                     if (!parseNonNegativeInt(t[2], 10, cnt)) {
                         printInvalid();
                         return true;
                     }
-                }
-                if (cnt > static_cast<int>(finance_tx_.size())) {
-                    printInvalid();
-                    return true;
-                }
-                if (cnt == 0) {
-                    cout << '\n';
-                    return true;
+                    if (cnt > static_cast<int>(finance_tx_.size())) {
+                        printInvalid();
+                        return true;
+                    }
+                    if (cnt == 0) {
+                        cout << '\n';
+                        return true;
+                    }
                 }
 
                 long long income = 0, expense = 0;
