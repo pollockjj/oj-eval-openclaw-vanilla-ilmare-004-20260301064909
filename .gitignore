@@ -7,3 +7,14 @@ code
 *.obj
 *.exe
 submission_ids.log
+
+# Runtime data files created by bookstore implementation
+account
+book
+log
+finance_log
+account_index
+book_index_ISBN
+book_index_author
+book_index_name
+book_index_keyword
